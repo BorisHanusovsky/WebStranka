@@ -1,7 +1,10 @@
-if (getCookie("language") === "ESP")
-    setLanguageSpanish()
-else if (getCookie("language") === "ENG")
-    setLanguageEnglish()
+function onLoad(){
+    if (getCookie("language") === "ESP")
+        setLanguageSpanish()
+    else if (getCookie("language") === "ENG")
+        setLanguageEnglish()
+}
+
 
 function getCookie(name) {
     const value = `; ${document.cookie}`;
@@ -22,3 +25,5 @@ function setLanguageEnglish(){
     document.getElementById("mainHeader").innerHTML = "Hello there"
     document.getElementById("version").innerHTML = "Version:"
 }
+
+on
