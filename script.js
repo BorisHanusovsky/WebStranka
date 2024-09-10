@@ -25,5 +25,3 @@ function setLanguageEnglish(){
     document.getElementById("mainHeader").innerHTML = "Hello there"
     document.getElementById("version").innerHTML = "Version:"
 }
-
-on
