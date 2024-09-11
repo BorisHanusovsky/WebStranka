@@ -3,6 +3,8 @@ function onLoad(){
         setLanguageSpanish()
     else if (getCookie("language") === "ENG")
         setLanguageEnglish()
+	else if (getCookie("language") === "SK")
+        setLanguageSlovak()
 }
 
 
@@ -13,6 +15,12 @@ function getCookie(name) {
     const parts = value.split(`; ${name}=`);
     if (parts.length === 2) return parts.pop().split(';').shift();
   }
+
+function setLanguageSlovak(){
+    document.cookie = "language = SK"
+    document.getElementById("mainHeader").innerHTML = "Ahoj"
+    document.getElementById("version").innerHTML = "Verzia:"
+}
 
 function setLanguageSpanish(){
     document.cookie = "language = ESP" 
