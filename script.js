@@ -33,3 +33,14 @@ function setLanguageEnglish(){
     document.getElementById("mainHeader").innerHTML = "Hello there"
     document.getElementById("version").innerHTML = "Version:"
 }
+
+function changeMode(value){
+	if(value.checked){
+		document.body.style.backgroundColor = "black"
+		document.body.style.color = "white"
+	}
+	else{
+		document.body.style.backgroundColor = "white"
+		document.body.style.color = "black"
+	}
+}
