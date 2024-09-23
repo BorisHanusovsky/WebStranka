@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel ="stylesheet" href="style.css"/>
+    <script src="script.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/monokai-sublime.min.css">
+</head>
+<body>
+    <h1 id="mainHeader">Hello there</h1>
+    <span id="version">Version:</span> <span>6</span>
+    <hr/>
+    <button onclick="setLanguageSlovak()">Slovenčina</button>
+    <button onclick="setLanguageEnglish()">English</button>
+    <button onclick="setLanguageSpanish()">Español</button>
+
+    <div id="darkMode">
+        <input id="checkboxDarkMode" type="checkbox" onclick='changeMode(this)'/>
+        <label for="checkboxDarkMode" class="labelDarkMode">Dark mode</label>
+    </div>
+
+    <pre><code class="language-csharp">
+        for (int i = 0; i < 10; i++) {
+            i++;
+        }
+    </code></pre>
+
+    <input id="itemInput" type="text" placeholder="Add item">
+    <button type="submit" onclick="adToList()">Pridat produkt</button>
+
+    <div id="itemList"></div> <!-- Div to display the added items -->
+
+    <!-- Load highlight.js from CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            console.log(hljs);  // Verify hljs is loaded
+            hljs.highlightAll();  // Apply syntax highlighting
+        });
+    </script>
+
+<script type="module">
+    let items = [];
+    window.items = items;
+
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-app.js";
+    import { getDatabase, ref, set, remove, onValue } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-database.js";
+
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+        apiKey: "AIzaSyAO7uEPE3vwAj8l9LDsyVL5X3cIx37UKMs",
+        authDomain: "shoppinglist-4267d.firebaseapp.com",
+        projectId: "shoppinglist-4267d",
+        storageBucket: "shoppinglist-4267d.appspot.com",
+        messagingSenderId: "401531762609",
+        appId: "1:401531762609:web:a9e7b060d9a01599986f90",
+        measurementId: "G-D2VE1RNGWC",
+        databaseURL: "https://shoppinglist-4267d-default-rtdb.europe-west1.firebasedatabase.app"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const database = getDatabase(app);
+    window.database = database;
+    window.dbRef = ref;
+    window.set = set;
+    window.remove = remove;
+
+    // Listen for real-time changes
+    const itemsRef = ref(database, 'nakup');
+    onValue(itemsRef, (snapshot) => {
+        const data = snapshot.val();
+        if (data) {
+            // Clear the current displayed list before updating
+            document.getElementById('itemList').innerHTML = '';
+            window.items = [];
+
+            Object.keys(data).forEach((key) => {
+                const item = data[key];
+                window.items.push(item);
+                addItemToDOM(item.name, key); // Update DOM dynamically
+            });
+        } else {
+            console.log("No data available");
+            document.getElementById('itemList').innerHTML = '';  // Clear list if no items
+        }
+    });
+
+    // Function to add an item to the DOM
+    function addItemToDOM(itemName, key) {
+        let elem = document.createElement('div');
+        elem.innerHTML = `${itemName} <button onclick="removeItem('${key}')">Remove</button>`;
+        elem.setAttribute('id', 'item-' + key);
+        document.getElementById('itemList').appendChild(elem);
+    }
+
+</script>
+
+<script>
+    // Define adToList outside the module script
+    function adToList() {
+        const value = document.getElementById('itemInput').value;
+
+        // Check if value is not empty
+        if (!value) {
+            console.log("Input is empty");
+            return;
+        }
+
+        // Use the globally accessible database and ref
+        const newItemRef = window.dbRef(window.database, 'nakup/' + Date.now());  // Use unique key (timestamp)
+        window.set(newItemRef, {
+            name: value,
+            count: 1,
+        }).then(() => {
+            console.log("Item added successfully");
+        }).catch((error) => {
+            console.error("Error adding item:", error);
+        });
+
+        // Clear the input field after adding
+        document.getElementById('itemInput').value = '';
+    }
+
+    // Function to remove an item from the database and UI
+    function removeItem(key) {
+        const itemRef = window.dbRef(window.database, 'nakup/' + key);
+
+        // Remove the item from Firebase
+        window.remove(itemRef).then(() => {
+            console.log("Item removed successfully");
+            // No need to remove it from DOM directly; real-time update will handle it
+        }).catch((error) => {
+            console.error("Error removing item:", error);
+        });
+    }
+</script>
+
+</body>
+</html>
