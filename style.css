@@ -7,3 +7,23 @@ iframe{
 	height: 100vh;
 }
 
+.buttonAdd{
+	background-color: #2ea351;
+	color: white;
+	border-radius: 5px;
+	border : none;
+	height: 25px;
+}
+.buttonRemove{
+	background-color: #c44949;
+	color: white;
+	border-radius: 5px;
+	border : none;
+	height: 25px;
+	margin-bottom: 5px;
+}
+
+#itemList{
+	width: 50%;
+}
+

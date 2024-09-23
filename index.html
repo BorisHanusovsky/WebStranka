@@ -10,7 +10,7 @@
 </head>
 <body onload="onLoad()">
     <h1 id="mainHeader">Hello there</h1>
-    <span id="version">Version:</span> <span>6</span>
+    <span id="version">Version:</span> <span>18</span>
     <hr/>
     <button onclick="setLanguageSlovak()">Slovenčina</button>
     <button onclick="setLanguageEnglish()">English</button>
@@ -23,12 +23,13 @@
 
     <pre><code class="language-csharp">
         for (int i = 0; i < 10; i++) {
-            i++;
+            Console.WriteLine($"Hello {i}. krat");
         }
     </code></pre>
 
+    <h3 id="headerShoppingList">Shopping list</h3>
     <input id="itemInput" type="text" placeholder="Add item">
-    <button type="submit" onclick="adToList()">Pridat produkt</button>
+    <button type="submit" class="buttonAdd" onclick="adToList()">Pridat produkt</button>
 
     <div id="itemList"></div> <!-- Div to display the added items -->
 
@@ -92,7 +93,7 @@
     // Function to add an item to the DOM
     function addItemToDOM(itemName, key) {
         let elem = document.createElement('div');
-        elem.innerHTML = `${itemName} <button onclick="removeItem('${key}')">Remove</button>`;
+        elem.innerHTML = `${itemName} <button class="buttonRemove" onclick="removeItem('${key}')">Remove</button>`;
         elem.setAttribute('id', 'item-' + key);
         document.getElementById('itemList').appendChild(elem);
     }
