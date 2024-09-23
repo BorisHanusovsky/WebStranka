@@ -9,6 +9,7 @@ function onLoad(){
     if (getCookie("darkMode") === "true")
         changeMode(true)
     else  changeMode(false)
+    
 }
 
 
