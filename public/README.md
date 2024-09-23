@@ -1,2 +1,0 @@
-# WebStranka
-velmi dobra stranka
