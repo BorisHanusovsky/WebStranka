@@ -44,7 +44,7 @@ function setLanguageEnglish(){
 }
 
 function changeMode(value){
-	if(value.checked){
+	if(value || value.checked){
         document.cookie = "darkMode = true"
 		document.body.style.backgroundColor = "black"
 		document.body.style.color = "white"
