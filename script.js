@@ -48,6 +48,7 @@ function changeMode(value){
         document.cookie = "darkMode = true"
 		document.body.style.backgroundColor = "black"
 		document.body.style.color = "white"
+        
 	}
 	
 	else{
