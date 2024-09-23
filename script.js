@@ -25,6 +25,8 @@ function setLanguageSlovak(){
     document.getElementById("mainHeader").innerHTML = "Ahoj"
     document.getElementById("version").innerHTML = "Verzia:"
     document.getElementById("headerShoppingList").innerHTML = "Nákupný zoznam"
+    document.getElementsByClassName("buttonAdd").innerHTML = "Pridať produkt"
+    document.getElementsByClassName("buttonRemove").innerHTML = "Odstrániť"
 }
 
 function setLanguageSpanish(){
@@ -32,7 +34,8 @@ function setLanguageSpanish(){
     document.getElementById("mainHeader").innerHTML = "Hola"
     document.getElementById("version").innerHTML = "Versión:"
     document.getElementById("headerShoppingList").innerHTML = "Lista de compras"
-
+    document.getElementsByClassName("buttonAdd").innerHTML = "Agregar producto"
+    document.getElementsByClassName("buttonRemove").innerHTML = "Eliminar"
 }
 
 function setLanguageEnglish(){
@@ -40,7 +43,8 @@ function setLanguageEnglish(){
     document.getElementById("mainHeader").innerHTML = "Hello there"
     document.getElementById("version").innerHTML = "Version:"
     document.getElementById("headerShoppingList").innerHTML = "Shopping list"
-
+    document.getElementsByClassName("buttonAdd").innerHTML = "Add item"
+    document.getElementsByClassName("buttonRemove").innerHTML = "Remove"
 }
 
 function changeMode(value){
@@ -48,7 +52,7 @@ function changeMode(value){
         document.cookie = "darkMode = true"
 		document.body.style.backgroundColor = "black"
 		document.body.style.color = "white"
-        
+
 	}
 	
 	else{
